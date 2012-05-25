@@ -28,6 +28,7 @@
     this.sorter = this.options.sorter || this.sorter
     this.highlighter = this.options.highlighter || this.highlighter
     this.valueof = this.options.valueof || this.valueof
+    this.itemfrom = this.options.itemfrom || this.itemfrom
     this.selected = this.options.selected || this.selected
     this.$menu = $(this.options.menu).appendTo('body')
     this.source = this.options.source
@@ -87,6 +88,7 @@
       })
 
       items = this.sorter(items)
+      items.unshift( this.itemfrom(this.query) )
 
       if (!items.length) {
         return this.shown ? this.hide() : this
@@ -123,6 +125,10 @@
 
   , valueof: function (item) {
       return item;
+    }
+
+  , itemfrom: function (query) {
+      return query;
     }
 
   , render: function (items) {
